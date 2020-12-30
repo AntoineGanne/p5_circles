@@ -28,36 +28,37 @@ var theCanvas;
 
 
 // const palette_values=['#0c056d','#590d82','#b61aae','#f25d9c']
-const palette_values=['#08d9d6','#252a34','#ff2e63','#eaeaea']
-let colors = []
-let canvas_size =500
-let horizon = canvas_size/4
-let nb_lines = 12
-let circles = []
+const palette_values=['#08d9d6','#252a34','#ff2e63','#eaeaea'];
+let colors = [];
+let canvas_size =500;
+let horizon = canvas_size/4;
+let nb_lines = 12;
+let circles = [];
 
 //===================================================
 function setup() {
   
-  theCanvas = createCanvas(window.innerWidth , window.innerWidth);
+  theCanvas = createCanvas(window.innerWidth,window.innerHeight-1);
   // var canvas = document.getElementById("canvas");
   // canvas.width  = window.innerWidth;
   // canvas.height = window.innerHeight;
   bRecording = false;
   nElapsedFrames = 0;
   
-  colorMode(HSB,300)
-  frameRate(30)
+  colorMode(HSB,300);
+  frameRate(30);
   background(75);
   
   palette_values.forEach(
     (colorValue, index, array) => { 
       colors.push(color(colorValue))
     }
-  )
+  );
   
   for(let i=1;i<=5;i++){
-    let pos = p5.Vector.random2D().mult(width*0.3).add(width/2,height/2)
-    let fancy_circle = new FancyCircle(pos.x,pos.y,i*10,random(palette_values))
+    let posX = random(width*0.5)+width/5
+    let posY = random(height*0.5)+width/5
+    let fancy_circle = new FancyCircle(posX,posY,i*10,random(palette_values));
     circles.push(fancy_circle)
   }
   
@@ -77,8 +78,8 @@ function keyTyped() {
 }
 
 function mousePressed(){
-  if(circles.length > 30) return
-  let fancy_circle = new FancyCircle(mouseX,mouseY,100,random(palette_values))
+  if(circles.length > 50) return;
+  let fancy_circle = new FancyCircle(mouseX,mouseY,100,random(palette_values));
     circles.push(fancy_circle)
 }
 
@@ -128,20 +129,20 @@ function renderMyDesign (percent) {
   stroke(colors[3]);
   strokeWeight(2);
   noiseDetail(2, 0.2);
-  console.log(frameRate())
+  console.log(frameRate());
 
   //----------------------
-  let start_cy = 200
-  let step = 2
-  let offy = 10
+  let start_cy = 200;
+  let step = 2;
+  let offy = 10;
   circles.forEach( function(item) {
-    item.draw()
-    item.update()
+    item.draw();
+    item.update();
     if(item.alpha==200){
-      let newCircle = new FancyCircle(item.mx,item.my,item.r*0.35,random(palette_values))
+      let newCircle = new FancyCircle(item.mx,item.my,item.r*0.35,random(palette_values));
       circles.push(newCircle)
     }
-  })
+  });
   circles = circles.filter(function(item){
     return item.alpha>1
   })

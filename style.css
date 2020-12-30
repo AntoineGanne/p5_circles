@@ -2,3 +2,11 @@ html, body {
   margin: 0;
   padding: 0;
 }
+.click_info{
+  position: absolute;
+  z-index: 1;
+  font-family: "Agency FB", serif;
+  padding: 10px;
+  color: lightskyblue;
+  font-size: 40px;
+}
