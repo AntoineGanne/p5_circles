@@ -77,7 +77,7 @@ function keyTyped() {
   }
 }
 
-function mousePressed(){
+function touchEnded(){
   if(circles.length > 50) return;
   let fancy_circle = new FancyCircle(mouseX,mouseY,100,random(palette_values));
     circles.push(fancy_circle)
