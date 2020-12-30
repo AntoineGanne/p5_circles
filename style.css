@@ -10,3 +10,6 @@ html, body {
   color: lightskyblue;
   font-size: 40px;
 }
+.canvas{
+  height: 100vh;
+}
